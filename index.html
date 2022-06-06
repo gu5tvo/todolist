@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <link rel="stylesheet" href="main.js"> -->
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <!-- ------------------------------- html ------------------------------------- -->
+    <div class="main-content">
+      <button id="display-todos-button">Display Todos</button>
+      <button id="toggle-all-button">Toggle All</button>
+      <div class="box">
+        <input id="add-todo-input" placeholder="todo" class="todo"/> 
+        <button id="add-todo-button">add</button>
+        <input id="position" placeholder="position" class="todo"/>
+        <input id="newValue" placeholder="newValue" class="todo"/>
+        <button id="edit-button">edit</button>
+        <button id="remove-button">remove</button>
+        <button id="toggle-button">toggle</button>
+       
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- ------------------------------------ js ------------------------------------- -->
+    <script>
+     
+var todos = [
+    { todoText: "item1", completed: false },
+    { todoText: "item2", completed: false },
+    { todoText: "item3", completed: false },
+    { todoText: "item4", completed: false },
+  ];
+
+  displayTodos();
+
+  function add() {
+   ;
+    todos.push({ TodoText: addTodoInput.value , status: false });
+    console.log(todos);
+    addTodoInput.value = '';
+  }
+
+  function edit() {
+    todos[editPosition.value] = { TodoText: editInput.value , status: false };
+    editInput.value = '';
+    editPosition.value = '';
+  }
+
+  function remove() {
+    todos.splice(editPosition.value, 1);
+    editPosition.value = '';
+  }
+
+  // habilidade de mudar de status
+
+  function toggle() {
+    position = editPosition.value;
+    if (todos[position].completed == false) {
+      todos[position].completed = true;
+    } else {
+      todos[position].completed = false;
+    }
+    editPosition.value = '';
+  }
+//////////////////////////////////////////////////////////////
+  function toggleAll() {
+    //   completed todos
+    var j = 0; 
+    //
+    for(var i = 0; i<todos.length; i++){
+      if(todos[i].completed == true ) {
+        j++;
+      }
+    }
+    if (j == todos.length) {
+      for (var i = 0; i<todos.length;i++){
+        todos[i].completed = false;
+      }
+    }else{
+      for (var i = 0; i<todos.length;i++){
+        todos[i].completed = true;
+    }
+  }
+}
+///////////////////////////////////////////////////////////////
+  function displayTodos() {
+    for (var i = 0; i < todos.length; i++) {
+      console.log(todos[i].todoText);
+    }
+  }
+
+
+  var  displayTodosButton = document.getElementById('display-todos-button');
+  displayTodosButton.addEventListener('click',displayTodos);
+
+  var toggleAllButton = document.getElementById('toggle-all-button');
+  toggleAllButton.addEventListener('click',toggleAll);
+
+  var addTodoInput = document.getElementById('add-todo-input');
+  var addTodoButton = document.getElementById('add-todo-button');
+  addTodoButton.addEventListener('click',add);
+
+
+  // edit esquema 
+
+  var editInput = document.getElementById('newValue');
+  var editPosition = document.getElementById('position');
+  var editButton = document.getElementById('edit-button');
+  editButton.addEventListener('click',edit);
+
+
+  var removeButton = document.getElementById('remove-button');
+removeButton.addEventListener('click', remove);
+
+var toggleButton = document.getElementById('toggle-button');
+toggleButton.addEventListener('click',toggle);
+
+    </script>
+  </body>
+</html>
+
+
+
+,
